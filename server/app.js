@@ -1,24 +1,24 @@
 const path = require('path');
 const express = require('express');
 const compression = require('compression');
-const favicon = require("serve-favicon");
+const favicon = require('serve-favicon');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const expressHandlebars = require('express-handlebars');
 const helmet = require('helmet');
 
+// const exp = require('constants');
 const router = require('./router.js');
-const exp = require('constants');
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
 const dbURI = process.env.MONGODB_URI || 'mongodb://127.0.0.1/DomoMaker';
 mongoose.connect(dbURI).catch((err) => {
-    if (err) {
-        console.log('could not connect to database');
-        throw err;
-    }
-})
+  if (err) {
+    console.log('could not connect to database');
+    throw err;
+  }
+});
 
 const app = express();
 
@@ -35,6 +35,6 @@ app.set('views', `${__dirname}/../views`);
 router(app);
 
 app.listen(port, (err) => {
-    if (err) { throw err; }
-    console.log(`Listening on port ${port}`);
-})
+  if (err) { throw err; }
+  console.log(`Listening on port ${port}`);
+});
